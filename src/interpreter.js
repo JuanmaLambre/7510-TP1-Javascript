@@ -1,7 +1,9 @@
+var parser = require('parser')
+
 var Interpreter = function () {
 
-    this.parseDB = function (params, paramss, paramsss) {
-
+    this.parseDB = function (data) {
+        
     }
 
     this.checkQuery = function (params) {
