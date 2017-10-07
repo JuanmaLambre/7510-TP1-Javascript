@@ -14,15 +14,7 @@ describe("Parser", function() {
     ]
 
     var parser = null;
-    var equalArrays = null;
 
-    before(function() {
-        equalArrays = (a1, a2) => {
-            return a1.length == a2.length && a1.every((x,i) => {
-                return x == a2[i];
-            })
-        }
-    })
 
     beforeEach(function() {
         parser = new Parser();
@@ -31,8 +23,18 @@ describe("Parser", function() {
     describe("Parser facts", function() {
         it("should obtain facts from db", function() {
             parser.parseFacts(db);
-            assert(equalArrays(parser.facts[0], ['genio', 'einstein']));
-            assert(equalArrays(parser.facts[1], ['musico', 'satie']));
+            assert.deepEqual(parser.facts[0], ['genio', 'einstein']);
+            assert.deepEqual(parser.facts[1], ['musico', 'satie']);
+        })
+    })
+
+    describe("Parser rules", function() {
+        it("should obtain rules form db", function() {
+            parser.parseRules(db);
+            var rule = parser.rules[0];
+            assert.deepEqual(rule[0], ["crack", "X"]);
+            assert.deepEqual(rule[1][0], ["genio", "X"]);
+            assert.deepEqual(rule[1][1], ["musico", "X"]);
         })
     })
 
