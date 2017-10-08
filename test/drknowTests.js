@@ -12,11 +12,11 @@ describe("DrKnow", function() {
         "genio(einstein).",
         "fisico(einstein)",
         "musico(satie).",
-        "varon(juan)",
-        "padre(pepe, juan)", 
-        "crack(X) :- genio(X), musico(X)",
-        "sabio(X) :- genio(X), fisico(X)",
-        "hijo(X, Y) :- varon(X), padre(Y, X)"
+        "varon(juan).",
+        "padre ( pepe,   juan).", 
+        "crack(X) :- genio(X), musico(X).",
+        "sabio(X) :- genio(X), fisico(X).",
+        "hijo(X, Y) :- varon(X), padre(Y, X)."
     ]
 
     var parser = null;
@@ -33,6 +33,10 @@ describe("DrKnow", function() {
     describe("ask", function() {
         it("should assert facts", function() {
             assert(drknow.ask("genio(einstein)", parser.facts, parser.rules));
+        })
+
+        it("should assert a fact with spaces", function() {
+            assert(drknow.ask("padre  ( pepe, juan)", parser.facts, parser.rules));
         })
 
         it("should apply rules", function() {

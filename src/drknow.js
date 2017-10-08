@@ -1,9 +1,9 @@
 var DrKnow = function() {
 
     this.assertsFact = function(query, facts) {
-        return facts.find((f) => {
+        return Boolean(facts.find((f) => {
             return f.every((value, i) => {return value == query[i]})
-        })
+        }))
     }
     
     this.appliesRule = function(query, facts, rules) {
@@ -18,7 +18,7 @@ var DrKnow = function() {
     }
 
     this.ask = function(queryStr, facts, rules) {
-        var query = queryStr.replace(/[\s\.]/, '').split(/[\(,\)]/).slice(0,-1);
+        var query = queryStr.replace(/[\s\.]/g, '').split(/[\(,\)]/).slice(0,-1);
         return this.assertsFact(query, facts) ||
                 this.appliesRule(query, facts, rules);
     }
